@@ -1,0 +1,16 @@
+SecRulesEnabled;
+#SecRulesDisabled;
+DeniedUrl "/RequestDenied";
+
+## Global WhiteList
+BasicRule wl:1005 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1010 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1011 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1315 "mz:$HEADERS_VAR:cookie";
+
+## check rules
+CheckRule "$SQL >= 8" BLOCK;
+CheckRule "$RFI >= 8" BLOCK;
+CheckRule "$TRAVERSAL >= 4" BLOCK;
+CheckRule "$EVADE >= 4" BLOCK;
+CheckRule "$XSS >= 8" BLOCK;

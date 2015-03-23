@@ -1,0 +1,72 @@
+user  daemon;
+worker_processes  3;
+
+pid        logs/nginx.pid;
+
+worker_rlimit_nofile 65535;
+
+events {
+    worker_connections  65535;
+}
+
+http {
+
+	include	      /usr/local/nginx/conf/naxsi/naxsi_core.rules;
+	include       mime.types;
+	default_type  application/octet-stream;
+
+	log_format  lu_access_log_1 '$remote_addr --- [$time_local] --- Bytes: $body_bytes_sent --- $request --- $status --- $http_referer';
+
+	log_format  lu_access_log_2 '$remote_addr --- [$time_local] --- Bytes: $body_bytes_sent --- $request --- $status --- $http_referer  --- $http_user_agent --- $http_x_forwarded_for --- $remote_user';
+
+	log_format  lu_access_log_3  '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $http_x_forwarded_for';
+
+
+	sendfile        on;
+	tcp_nodelay	on;
+	server_tokens off;
+	keepalive_timeout  120;
+
+	#fastcgi_connect_timeout 300;
+	#fastcgi_send_timeout 300;
+	#fastcgi_read_timeout 300;
+	fastcgi_intercept_errors on;
+	
+	client_header_buffer_size 32k;
+	large_client_header_buffers 4 32k;
+
+	fastcgi_buffer_size 32k;
+	fastcgi_buffers 4 32k;
+	fastcgi_busy_buffers_size 32k;
+	fastcgi_temp_file_write_size 64k;
+		
+	server_names_hash_bucket_size 128;
+
+	client_max_body_size 2000M;
+
+	limit_zone   one  $binary_remote_addr  16m;
+	#limit_conn_zone $binary_remote_addr zone=one:10m;
+
+	gzip on;
+	gzip_min_length 1k;
+	gzip_buffers 4 12k;
+	gzip_comp_level 3;
+	gzip_types text/plain application/x-javascript text/css application/xml;
+
+	#No Header Allow
+	server {
+     listen       80 default;
+     server_name  _;
+     location / {
+     root   html;
+     return 404;
+                    }
+     location ~ /.ht {
+     deny  all;
+                      }
+       }
+       
+	include /usr/local/nginx/conf/vhost/*.conf;
+
+}
+

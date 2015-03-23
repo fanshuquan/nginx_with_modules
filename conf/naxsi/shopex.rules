@@ -1,0 +1,22 @@
+SecRulesEnabled;
+#SecRulesDisabled;
+DeniedUrl "/RequestDenied";
+
+## Global WhiteList
+BasicRule wl:1005 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1010 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1011 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1315 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1310 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1311 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1000 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1000 "mz:$URL:/passport-verify.html|$BODY_VAR:from_minipassport";
+BasicRule wl:1100 "mz:$URL:/passport-verify.html|$BODY_VAR:ref_url";
+
+
+## check rules
+CheckRule "$SQL >= 8" BLOCK;
+CheckRule "$RFI >= 8" BLOCK;
+CheckRule "$TRAVERSAL >= 4" BLOCK;
+CheckRule "$EVADE >= 4" BLOCK;
+CheckRule "$XSS >= 8" BLOCK;

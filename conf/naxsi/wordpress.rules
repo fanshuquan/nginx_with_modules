@@ -1,0 +1,24 @@
+SecRulesEnabled;
+#SecRulesDisabled;
+DeniedUrl "/RequestDenied";
+
+BasicRule wl:1315 "mz:$HEADERS_VAR:cookie" ; 
+BasicRule wl:1010 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1011 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1005 "mz:$HEADERS_VAR:cookie";
+
+BasicRule wl:1016 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1000 "mz:$HEADERS_VAR:cookie";
+BasicRule wl:1015 "mz:$HEADERS_VAR:cookie";
+
+
+# Redirect to wp-admin
+BasicRule wl:1100 "mz:$ARGS_VAR:redirect_to" ; 
+BasicRule wl:1100 "mz:$URL:/wp-login.php|$BODY_VAR:redirect_to";
+
+## check rules
+CheckRule "$SQL >= 8" BLOCK;
+CheckRule "$RFI >= 8" BLOCK;
+CheckRule "$TRAVERSAL >= 4" BLOCK;
+CheckRule "$EVADE >= 4" BLOCK;
+CheckRule "$XSS >= 8" BLOCK;
