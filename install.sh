@@ -16,35 +16,14 @@ cp ./nginx.txt /tmp/
 cp ./conf /tmp/ -r
 cd /tmp
 
-if [ ! -f "nginx-1.2.0.tar.gz" ];then
-	echo "Downloading http://nginx.org/download/nginx-1.2.0.tar.gz!!!"
-	wget http://nginx.org/download/nginx-1.2.0.tar.gz
-fi 
 tar -zxvf nginx-1.2.0.tar.gz
 
-if [ ! -f "ngx_cache_purge-1.3.tar.gz" ];then
-	echo "http://labs.frickle.com/files/ngx_cache_purge-1.3.tar.gz!!!"
-	wget http://labs.frickle.com/files/ngx_cache_purge-1.3.tar.gz
-fi 
 tar -zxvf ngx_cache_purge-1.3.tar.gz
 
-
-if [ ! -f "pcre-8.10.tar.gz" ];then
-	echo "Downloading http://webserver.googlecode.com/files/pcre-8.10.tar.gz!!!"
-	wget http://webserver.googlecode.com/files/pcre-8.10.tar.gz
-fi 
 tar -zxvf pcre-8.10.tar.gz
 
-if [ ! -f "openssl-1.0.0c.tar.gz" ];then
-	echo "Downloading http://www.openssl.org/source/openssl-1.0.0c.tar.gz!!!"
-	wget http://www.openssl.org/source/openssl-1.0.0c.tar.gz
-fi 
 tar -zxvf openssl-1.0.0c.tar.gz
 
-if [ ! -f "gperftools-2.0.tar.gz" ];then
-	echo "https://gperftools.googlecode.com/files/gperftools-2.0.tar.gz!!!"
-	wget https://gperftools.googlecode.com/files/gperftools-2.0.tar.gz
-fi 
 tar -zxvf gperftools-2.0.tar.gz
 
 cd gperftools-2.0
